@@ -3,10 +3,10 @@ import { v4 as uuid } from "uuid";
 
 const defaultItem = {
   name: "",
-  category: "",
+  category: "Produce",
 };
 
-function ItemForm(props) {
+function ItemForm({ addItem }) {
   const [newItem, setNewItem] = useState(defaultItem);
 
   function handleChange(event) {
@@ -18,6 +18,12 @@ function ItemForm(props) {
 
   function handleSubmit(event) {
     event.preventDefault();
+    const itemToAdd = {
+      ...newItem,
+      id: uuid(),
+    };
+    addItem(itemToAdd);
+    setNewItem(defaultItem);
   }
 
   return (
